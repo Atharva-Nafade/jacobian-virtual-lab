@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posttest - Jacobian Virtual Lab</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+        }
+
+        body{
+            background:#f4f7fa;
+            color:#333;
+        }
+
+        header{
+            background:linear-gradient(135deg,#2c3e50,#1a2530);
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        .container{
+            max-width:950px;
+            margin:40px auto;
+            padding:20px;
+        }
+
+        .quiz-box{
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:15px;
+            color:#2c3e50;
+        }
+
+        .subtitle{
+            text-align:center;
+            margin-bottom:35px;
+            color:#555;
+        }
+
+        .question{
+            margin-bottom:30px;
+        }
+
+        .question h3{
+            margin-bottom:15px;
+            color:#2c3e50;
+        }
+
+        .question p{
+            margin-bottom:15px;
+            font-size:17px;
+        }
+
+        .options label{
+            display:block;
+            background:#f8f9fa;
+            padding:12px;
+            margin-bottom:10px;
+            border-radius:8px;
+            border:1px solid #ddd;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .options label:hover{
+            background:#eaf4ff;
+            border-color:#3498db;
+        }
+
+        input[type="radio"]{
+            margin-right:10px;
+        }
+
+        .hint{
+            margin-top:8px;
+            padding:10px 12px;
+            border-radius:8px;
+            font-size:15px;
+            display:none;
+        }
+
+        .hint.wrong{
+            display:block;
+            background:#fff3cd;
+            color:#856404;
+            border:1px solid #ffeeba;
+        }
+
+        .hint.correct{
+            display:block;
+            background:#d4edda;
+            color:#155724;
+            border:1px solid #c3e6cb;
+        }
+
+        .submit-btn{
+            width:100%;
+            padding:15px;
+            border:none;
+            background:#3498db;
+            color:white;
+            font-size:18px;
+            border-radius:8px;
+            cursor:pointer;
+            transition:0.3s;
+            margin-top:10px;
+        }
+
+        .submit-btn:hover{
+            background:#217dbb;
+        }
+
+        #result{
+            margin-top:25px;
+            text-align:center;
+            font-size:24px;
+            font-weight:bold;
+            color:#2c3e50;
+        }
+
+        .back-btn{
+            display:inline-block;
+            margin-top:25px;
+            padding:12px 20px;
+            background:#2c3e50;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+        }
+
+        footer{
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Labs</h1>
+    <p>Posttest - Jacobian Matrix and Determinant</p>
+</header>
+
+<div class="container">
+
+    <div class="quiz-box">
+
+        <h2>✅ Posttest — Test Your Understanding</h2>
+
+        <p class="subtitle">
+            Answer these questions after studying the theory.
+            These are based on concepts from the experiment.
+        </p>
+
+        <form id="quizForm">
+
+            <!-- Question 1 -->
+            <div class="question">
+                <h3>Question 1 of 6</h3>
+
+                <p>
+                    For u = x² − y² and v = 2xy,
+                    the Jacobian ∂(u,v)/∂(x,y) equals:
+                </p>
+
+                <div class="options">
+                    <label><input type="radio" name="q1"> 2(x² − y²)</label>
+                    <label><input type="radio" name="q1" value="correct"> 4(x² + y²)</label>
+                    <label><input type="radio" name="q1"> 4xy</label>
+                    <label><input type="radio" name="q1"> 2(x² + y²)</label>
+                </div>
+
+                <div class="hint" id="hint-q1"></div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <h3>Question 2 of 6</h3>
+
+                <p>
+                    The Jacobian for polar to Cartesian transformation
+                    (x = r cosθ, y = r sinθ) is:
+                </p>
+
+                <div class="options">
+                    <label><input type="radio" name="q2"> 1</label>
+                    <label><input type="radio" name="q2" value="correct"> r</label>
+                    <label><input type="radio" name="q2"> r²</label>
+                    <label><input type="radio" name="q2"> 1/r</label>
+                </div>
+
+                <div class="hint" id="hint-q2"></div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <h3>Question 3 of 6</h3>
+
+                <p>
+                    If J = ∂(u,v)/∂(x,y) = 5,
+                    what is ∂(x,y)/∂(u,v)?
+                </p>
+
+                <div class="options">
+                    <label><input type="radio" name="q3"> 5</label>
+                    <label><input type="radio" name="q3"> −5</label>
+                    <label><input type="radio" name="q3" value="correct"> 1/5</label>
+                    <label><input type="radio" name="q3"> 25</label>
+                </div>
+
+                <div class="hint" id="hint-q3"></div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <h3>Question 4 of 6</h3>
+
+                <p>
+                    For the transformation x = 2u + v and y = u − v,
+                    find the Jacobian ∂(x,y)/∂(u,v).
+                </p>
+
+                <div class="options">
+                    <label><input type="radio" name="q4"> 3</label>
+                    <label><input type="radio" name="q4" value="correct"> −3</label>
+                    <label><input type="radio" name="q4"> −1</label>
+                    <label><input type="radio" name="q4"> 1</label>
+                </div>
+
+                <div class="hint" id="hint-q4"></div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <h3>Question 5 of 6</h3>
+
+                <p>
+                    If the Jacobian of a transformation is negative,
+                    it means:
+                </p>
+
+                <div class="options">
+                    <label><input type="radio" name="q5"> The transformation is invalid.</label>
+                    <label><input type="radio" name="q5" value="correct">
+                        The transformation reverses the orientation.
+                    </label>
+                    <label><input type="radio" name="q5"> The transformation has no inverse.</label>
+                    <label><input type="radio" name="q5"> Area is preserved.</label>
+                </div>
+
+                <div class="hint" id="hint-q5"></div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <h3>Question 6 of 6</h3>
+
+                <p>
+                    For the transformation
+                    u = 2x + 3y, v = x − y,
+                    the Jacobian ∂(u,v)/∂(x,y) is:
+                </p>
+
+                <div class="options">
+                    <label><input type="radio" name="q6" value="correct"> −5</label>
+                    <label><input type="radio" name="q6"> 5</label>
+                    <label><input type="radio" name="q6"> −2</label>
+                    <label><input type="radio" name="q6"> 2</label>
+                </div>
+
+                <div class="hint" id="hint-q6"></div>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="checkAnswers()">
+                Submit Posttest
+            </button>
+
+        </form>
+
+        <div id="result"></div>
+
+        <a href="project(1).html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>Virtual Labs © 2026 | Jacobian Posttest</p>
+</footer>
+
+<script>
+
+const hints = {
+    q1: "Hint: First form the Jacobian matrix using ∂u/∂x, ∂u/∂y, ∂v/∂x, ∂v/∂y, then calculate determinant.",
+    q2: "Hint: For polar coordinates, calculate determinant of [[cosθ, -r sinθ], [sinθ, r cosθ]].",
+    q3: "Hint: Inverse Jacobian is reciprocal of original Jacobian, so use 1/J.",
+    q4: "Hint: Make the matrix [[∂x/∂u, ∂x/∂v], [∂y/∂u, ∂y/∂v]] = [[2, 1], [1, -1]], then calculate determinant: (2)(-1) - (1)(1).",
+    q5: "Hint: Negative sign does not mean invalid. It shows change in orientation direction.",
+    q6: "Hint: Make matrix [[∂u/∂x, ∂u/∂y], [∂v/∂x, ∂v/∂y]] = [[2, 3], [1, -1]] and find determinant."
+};
+
+const totalQuestions = 6;
+
+function showHint(questionName, selectedOption){
+    const hintBox = document.getElementById("hint-" + questionName);
+
+    if(selectedOption.value === "correct"){
+        hintBox.className = "hint correct";
+        hintBox.innerHTML = "✅ Correct answer!";
+    }
+    else{
+        hintBox.className = "hint wrong";
+        hintBox.innerHTML = "💡 " + hints[questionName];
+    }
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(function(option){
+    option.addEventListener("change", function(){
+        showHint(this.name, this);
+    });
+});
+
+function checkAnswers(){
+
+    let score = 0;
+
+    const answers = document.querySelectorAll('input[value="correct"]:checked');
+
+    score = answers.length;
+
+    document.getElementById("result").innerHTML =
+        "You scored " + score + " out of " + totalQuestions;
+
+}
+
+</script>
+
+</body>
+</html>

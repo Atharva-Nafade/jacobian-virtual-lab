@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory - Jacobian Virtual Lab</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body{
+            background:#f8f9fa;
+            color:#333;
+            line-height:1.7;
+        }
+
+        header{
+            background:linear-gradient(135deg,#2c3e50,#1a2530);
+            color:white;
+            padding:20px;
+            text-align:center;
+        }
+
+        .content{
+            padding:40px;
+        }
+
+        .theory-box{
+            background:white;
+            padding:35px;
+            border-radius:10px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2,h3{
+            color:#2c3e50;
+            margin-top:20px;
+            margin-bottom:15px;
+        }
+
+        p{
+            margin-bottom:15px;
+        }
+
+        ul{
+            margin-left:25px;
+            line-height:2;
+        }
+
+        .formula{
+            background:#eef6ff;
+            padding:15px;
+            border-left:5px solid #3498db;
+            margin:20px 0;
+            font-size:18px;
+        }
+
+        .btn{
+            margin-top:30px;
+            padding:12px 25px;
+            border:none;
+            background:#3498db;
+            color:white;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        footer{
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Labs</h1>
+</header>
+
+<main class="content">
+
+    <div class="theory-box">
+
+        <h2>Theory of Jacobian Matrix and Jacobian Determinant</h2>
+
+        <p>
+            The Jacobian is a determinant formed using first-order partial 
+            derivatives of functions involving two or more variables. 
+            It is used in multivariable calculus and coordinate transformations.
+        </p>
+
+        <h3>Jacobian Matrix</h3>
+
+        <p>
+            The Jacobian matrix is a matrix of partial derivatives of functions.
+        </p>
+
+        <div class="formula">
+            J =
+            | ∂x/∂u   ∂x/∂v |
+            <br>
+            | ∂y/∂u   ∂y/∂v |
+        </div>
+
+        <h3>Jacobian Determinant</h3>
+
+        <div class="formula">
+            J = ∂(x,y) / ∂(u,v)
+        </div>
+
+        <div class="formula">
+            J =
+            (∂x/∂u)(∂y/∂v)
+            -
+            (∂x/∂v)(∂y/∂u)
+        </div>
+
+        <h3>Steps to Solve Jacobian</h3>
+
+        <ul>
+
+            <li>Write the functions clearly.</li>
+
+            <li>Find all partial derivatives.</li>
+
+            <li>Form the Jacobian matrix.</li>
+
+            <li>Find determinant of matrix.</li>
+
+            <li>Simplify the answer.</li>
+
+        </ul>
+
+        <h3>Important Property</h3>
+
+        <div class="formula">
+            J × J' = 1
+        </div>
+
+        <p>
+            where J' is the Jacobian of inverse transformation.
+        </p>
+
+        <h3>Applications</h3>
+
+        <ul>
+
+            <li>Coordinate transformation</li>
+
+            <li>Engineering mathematics</li>
+
+            <li>Multiple integrals</li>
+
+            <li>Area and volume transformations</li>
+
+        </ul>
+
+        <a href="project(1).html">
+
+            <button class="btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </button>
+
+        </a>
+
+    </div>
+
+</main>
+
+<footer>
+    <p>Virtual Labs © 2026 | Jacobian of Matrix</p>
+</footer>
+
+</body>
+</html>

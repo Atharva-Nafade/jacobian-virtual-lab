@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pretest - Jacobian Virtual Lab</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+        }
+
+        body{
+            background:#f4f7fa;
+            color:#333;
+        }
+
+        header{
+            background:linear-gradient(135deg,#2c3e50,#1a2530);
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        .container{
+            max-width:900px;
+            margin:40px auto;
+            padding:20px;
+        }
+
+        .quiz-box{
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#2c3e50;
+        }
+
+        .question{
+            margin-bottom:30px;
+        }
+
+        .question h3{
+            margin-bottom:15px;
+            color:#2c3e50;
+        }
+
+        .options label{
+            display:block;
+            background:#f8f9fa;
+            padding:12px;
+            margin-bottom:10px;
+            border-radius:8px;
+            cursor:pointer;
+            transition:0.3s;
+            border:1px solid #ddd;
+        }
+
+        .options label:hover{
+            background:#eaf4ff;
+            border-color:#3498db;
+        }
+
+        .options label.correct-option{
+            background:#eafaf1;
+            border-color:#2ecc71;
+        }
+
+        .options label.wrong-option{
+            background:#fff0f0;
+            border-color:#e74c3c;
+        }
+
+        input[type="radio"]{
+            margin-right:10px;
+        }
+
+        .hint-box{
+            display:none;
+            margin-top:10px;
+            padding:12px;
+            border-radius:8px;
+            font-size:15px;
+            line-height:1.5;
+        }
+
+        .hint-box.correct{
+            display:block;
+            background:#eafaf1;
+            color:#1e8449;
+            border-left:5px solid #2ecc71;
+        }
+
+        .hint-box.wrong{
+            display:block;
+            background:#fff4e5;
+            color:#8a5a00;
+            border-left:5px solid #f39c12;
+        }
+
+        .hint-box.unanswered{
+            display:block;
+            background:#eef5ff;
+            color:#2c3e50;
+            border-left:5px solid #3498db;
+        }
+
+        .submit-btn{
+            display:block;
+            width:100%;
+            padding:15px;
+            border:none;
+            background:#3498db;
+            color:white;
+            font-size:18px;
+            border-radius:8px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .submit-btn:hover{
+            background:#217dbb;
+        }
+
+        #result{
+            margin-top:25px;
+            text-align:center;
+            font-size:22px;
+            font-weight:bold;
+            color:#2c3e50;
+        }
+
+        .back-btn{
+            margin-top:25px;
+            display:inline-block;
+            padding:12px 20px;
+            background:#2c3e50;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+        }
+
+        footer{
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Labs</h1>
+    <p>Pretest - Jacobian Matrix and Determinant</p>
+</header>
+
+<div class="container">
+
+    <div class="quiz-box">
+
+        <h2>Pretest Quiz</h2>
+
+        <form id="quizForm">
+
+            <div class="question" data-question="q1">
+                <h3>Question 1 of 5</h3>
+                <p>What is the partial derivative of u = x²y + 3xy² with respect to x?</p>
+
+                <div class="options">
+                    <label><input type="radio" name="q1" value="correct" data-hint="Correct! Treat y as constant. Derivative of x²y is 2xy and derivative of 3xy² is 3y²."> 2xy + 3y²</label>
+                    <label><input type="radio" name="q1" data-hint="Hint: You differentiated with respect to y. For ∂/∂x, keep y constant and differentiate only x terms."> x² + 6xy</label>
+                    <label><input type="radio" name="q1" data-hint="Hint: The derivative of 3xy² with respect to x is 3y², not 6y."> 2xy + 6y</label>
+                    <label><input type="radio" name="q1" data-hint="Hint: Do not copy the original expression. Differentiate each term with respect to x."> x²y + 3y²</label>
+                </div>
+                <div class="hint-box"></div>
+            </div>
+
+            <div class="question" data-question="q2">
+                <h3>Question 2 of 5</h3>
+                <p>What is the determinant of the matrix [[a, b], [c, d]]?</p>
+
+                <div class="options">
+                    <label><input type="radio" name="q2" data-hint="Hint: For a 2×2 determinant, multiply the main diagonal and subtract the other diagonal."> ab − cd</label>
+                    <label><input type="radio" name="q2" data-hint="Hint: The cross product bc is subtracted, not added."> ad + bc</label>
+                    <label><input type="radio" name="q2" value="correct" data-hint="Correct! Determinant of [[a,b],[c,d]] is ad − bc."> ad − bc</label>
+                    <label><input type="radio" name="q2" data-hint="Hint: Use diagonal multiplication: top-left × bottom-right minus top-right × bottom-left."> ac − bd</label>
+                </div>
+                <div class="hint-box"></div>
+            </div>
+
+            <div class="question" data-question="q3">
+                <h3>Question 3 of 5</h3>
+                <p>If f(x,y) = e<sup>xy</sup>, what is ∂f/∂y?</p>
+
+                <div class="options">
+                    <label><input type="radio" name="q3" value="correct" data-hint="Correct! Using chain rule, derivative of xy with respect to y is x, so answer is x·eˣʸ."> x · e<sup>xy</sup></label>
+                    <label><input type="radio" name="q3" data-hint="Hint: You are differentiating with respect to y, so derivative of xy is x, not y."> y · e<sup>xy</sup></label>
+                    <label><input type="radio" name="q3" data-hint="Hint: Apply chain rule. Multiply eˣʸ by derivative of xy with respect to y."> e<sup>xy</sup></label>
+                    <label><input type="radio" name="q3" data-hint="Hint: This is not a power rule case. For e raised to a function, use chain rule."> xy · e<sup>xy−1</sup></label>
+                </div>
+                <div class="hint-box"></div>
+            </div>
+
+            <div class="question" data-question="q4">
+                <h3>Question 4 of 5</h3>
+                <p>For polar coordinates x = r cosθ, y = r sinθ, what is ∂x/∂θ?</p>
+
+                <div class="options">
+                    <label><input type="radio" name="q4" data-hint="Hint: cosθ differentiates to −sinθ, and r is treated as constant."> cosθ</label>
+                    <label><input type="radio" name="q4" value="correct" data-hint="Correct! ∂/∂θ of r cosθ is −r sinθ."> −r sinθ</label>
+                    <label><input type="radio" name="q4" data-hint="Hint: r cosθ is the original expression for x. Now differentiate it with respect to θ."> r cosθ</label>
+                    <label><input type="radio" name="q4" data-hint="Hint: Remember the negative sign and the constant multiplier r."> sinθ</label>
+                </div>
+                <div class="hint-box"></div>
+            </div>
+
+            <div class="question" data-question="q5">
+                <h3>Question 5 of 5</h3>
+                <p>A 2×2 determinant equals zero. What does this imply about the transformation?</p>
+
+                <div class="options">
+                    <label><input type="radio" name="q5" data-hint="Hint: Expansion of area happens when determinant magnitude is greater than 1, not zero."> The transformation expands area.</label>
+                    <label><input type="radio" name="q5" value="correct" data-hint="Correct! Zero determinant means the transformation is singular and cannot be inverted."> The transformation is singular (non-invertible).</label>
+                    <label><input type="radio" name="q5" data-hint="Hint: Area is preserved when determinant magnitude is 1, not zero."> The transformation preserves area.</label>
+                    <label><input type="radio" name="q5" data-hint="Hint: Orientation reversal happens when determinant is negative. Zero means loss of dimension/non-invertibility."> The transformation reverses orientation.</label>
+                </div>
+                <div class="hint-box"></div>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="checkAnswers()">
+                Submit Pretest
+            </button>
+
+        </form>
+
+        <div id="result"></div>
+
+        <a href="project(1).html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>Virtual Labs © 2026 | Jacobian Pretest</p>
+</footer>
+
+<script>
+const totalQuestions = 5;
+
+function clearQuestionStyles(questionBlock){
+    questionBlock.querySelectorAll('.options label').forEach(label => {
+        label.classList.remove('correct-option', 'wrong-option');
+    });
+}
+
+function showHint(selectedInput){
+    const questionBlock = selectedInput.closest('.question');
+    const hintBox = questionBlock.querySelector('.hint-box');
+    const selectedLabel = selectedInput.closest('label');
+
+    clearQuestionStyles(questionBlock);
+
+    hintBox.textContent = selectedInput.dataset.hint;
+
+    if(selectedInput.value === 'correct'){
+        hintBox.className = 'hint-box correct';
+        selectedLabel.classList.add('correct-option');
+    } else {
+        hintBox.className = 'hint-box wrong';
+        selectedLabel.classList.add('wrong-option');
+    }
+}
+
+document.querySelectorAll('input[type="radio"]').forEach(option => {
+    option.addEventListener('change', function(){
+        showHint(this);
+    });
+});
+
+function checkAnswers(){
+    let score = 0;
+    let attempted = 0;
+
+    for(let i = 1; i <= totalQuestions; i++){
+        const selected = document.querySelector('input[name="q' + i + '"]:checked');
+        const questionBlock = document.querySelector('[data-question="q' + i + '"]');
+        const hintBox = questionBlock.querySelector('.hint-box');
+
+        if(selected){
+            attempted++;
+            if(selected.value === 'correct'){
+                score++;
+            }
+        } else {
+            clearQuestionStyles(questionBlock);
+            hintBox.textContent = 'Please attempt this question. Read the concept once and select an option.';
+            hintBox.className = 'hint-box unanswered';
+        }
+    }
+
+    document.getElementById('result').innerHTML =
+        'You scored ' + score + ' out of ' + totalQuestions + '<br><small>Attempted: ' + attempted + '/' + totalQuestions + '</small>';
+}
+</script>
+
+</body>
+</html>

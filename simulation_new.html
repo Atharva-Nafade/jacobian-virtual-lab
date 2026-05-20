@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jacobian Simulation - Symbolic and Numeric</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,GeneVA,Verdana,sans-serif;
+}
+body{
+    background:#f4f7fa;
+    color:#333;
+}
+header{
+    background:linear-gradient(135deg,#2c3e50,#1a2530);
+    color:white;
+    text-align:center;
+    padding:22px;
+}
+.container{
+    max-width:1000px;
+    margin:35px auto;
+    padding:20px;
+}
+.box{
+    background:white;
+    padding:30px;
+    border-radius:14px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+}
+h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:15px;
+}
+.note{
+    background:#eef6ff;
+    border-left:5px solid #3498db;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:25px;
+}
+.input-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+.input-group{
+    margin-bottom:18px;
+}
+label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+    color:#2c3e50;
+}
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+input:focus{
+    outline:none;
+    border-color:#3498db;
+}
+.btn-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:15px;
+}
+button{
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:17px;
+    color:white;
+    background:#3498db;
+}
+button:hover{
+    background:#217dbb;
+}
+.clear-btn{
+    background:#2c3e50;
+}
+.clear-btn:hover{
+    background:#1a2530;
+}
+.result{
+    display:none;
+    margin-top:25px;
+    padding:22px;
+    background:#f8f9fa;
+    border-radius:10px;
+    border-left:5px solid #2ecc71;
+}
+.result h3{
+    color:#2c3e50;
+    margin-bottom:12px;
+}
+.step{
+    background:white;
+    padding:12px;
+    border-radius:8px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    line-height:1.6;
+}
+.error{
+    display:none;
+    margin-top:20px;
+    background:#fff0f0;
+    color:#a94442;
+    padding:15px;
+    border-left:5px solid #e74c3c;
+    border-radius:8px;
+}
+.example{
+    margin-top:25px;
+    background:#fffbe6;
+    border-left:5px solid #f1c40f;
+    padding:15px;
+    border-radius:8px;
+}
+.back-btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:12px 20px;
+    background:#2c3e50;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+@media(max-width:700px){
+    .input-grid,.btn-row{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Labs</h1>
+    <p>Jacobian Calculator - Symbolic and Numeric Simulation</p>
+</header>
+
+<div class="container">
+<div class="box">
+
+<h2>Jacobian Simulation</h2>
+
+<div class="note">
+    <b>Use this format:</b><br>
+    Write multiplication with <b>*</b>. Example: use <b>x*y</b>, not <b>xy</b>.<br>
+    Use <b>sin(x)</b>, <b>cos(x)</b>, <b>tan(x)</b>, <b>exp(x*y)</b>, <b>x^2+y^2</b>.
+</div>
+
+<div class="input-grid">
+    <div class="input-group">
+        <label>Function u</label>
+        <input type="text" id="uFunc" placeholder="Example: x^2 + y^2">
+    </div>
+
+    <div class="input-group">
+        <label>Function v</label>
+        <input type="text" id="vFunc" placeholder="Example: x*y">
+    </div>
+
+    <div class="input-group">
+        <label>First Variable</label>
+        <input type="text" id="var1" placeholder="Example: x">
+    </div>
+
+    <div class="input-group">
+        <label>Second Variable</label>
+        <input type="text" id="var2" placeholder="Example: y">
+    </div>
+
+    <div class="input-group">
+        <label>Value of First Variable Optional</label>
+        <input type="number" id="val1" placeholder="Example: 2">
+    </div>
+
+    <div class="input-group">
+        <label>Value of Second Variable Optional</label>
+        <input type="number" id="val2" placeholder="Example: 3">
+    </div>
+</div>
+
+<div class="btn-row">
+    <button onclick="calculateJacobian()">Calculate Jacobian</button>
+    <button class="clear-btn" onclick="clearAll()">Clear</button>
+</div>
+
+<div class="error" id="errorBox"></div>
+
+<div class="result" id="resultBox">
+    <h3>Step-by-Step Solution</h3>
+    <div class="step" id="step1"></div>
+    <div class="step" id="step2"></div>
+    <div class="step" id="step3"></div>
+    <div class="step" id="step4"></div>
+    <div class="step" id="step5"></div>
+    <div class="step" id="step6"></div>
+</div>
+
+<div class="example">
+    <b>Examples:</b><br>
+    1) u = <b>x^2+y^2</b>, v = <b>x*y</b>, variables = <b>x, y</b><br>
+    2) u = <b>sin(x+y)</b>, v = <b>exp(x*y)</b>, variables = <b>x, y</b><br>
+    3) u = <b>r*cos(t)</b>, v = <b>r*sin(t)</b>, variables = <b>r, t</b><br><br>
+    If you leave values blank, it gives symbolic answer. If you enter values, it gives symbolic + numeric answer.
+</div>
+
+<a href="project(1).html" class="back-btn">← Back to Home</a>
+
+</div>
+</div>
+
+<script>
+function showError(message){
+    document.getElementById("errorBox").style.display = "block";
+    document.getElementById("errorBox").innerHTML = message;
+    document.getElementById("resultBox").style.display = "none";
+}
+
+function hideError(){
+    document.getElementById("errorBox").style.display = "none";
+}
+
+function cleanExpression(expr){
+    return expr
+        .replaceAll("π", "pi")
+        .replaceAll(" e^", " exp")
+        .replace(/^e\^\((.*)\)$/g, "exp($1)");
+}
+
+function calculateJacobian(){
+    hideError();
+
+    let u = cleanExpression(document.getElementById("uFunc").value.trim());
+    let v = cleanExpression(document.getElementById("vFunc").value.trim());
+    let x = document.getElementById("var1").value.trim();
+    let y = document.getElementById("var2").value.trim();
+    let val1 = document.getElementById("val1").value.trim();
+    let val2 = document.getElementById("val2").value.trim();
+
+    if(!u || !v || !x || !y){
+        showError("Please enter both functions and both variable names.");
+        return;
+    }
+
+    if(x === y){
+        showError("First variable and second variable must be different.");
+        return;
+    }
+
+    try{
+        let uNode = math.parse(u);
+        let vNode = math.parse(v);
+
+        let du_dx = math.derivative(uNode, x);
+        let du_dy = math.derivative(uNode, y);
+        let dv_dx = math.derivative(vNode, x);
+        let dv_dy = math.derivative(vNode, y);
+
+        let part1 = new math.OperatorNode('*', 'multiply', [du_dx, dv_dy]);
+        let part2 = new math.OperatorNode('*', 'multiply', [du_dy, dv_dx]);
+        let jacNode = new math.OperatorNode('-', 'subtract', [part1, part2]);
+
+        let du_dx_s = du_dx.toString();
+        let du_dy_s = du_dy.toString();
+        let dv_dx_s = dv_dx.toString();
+        let dv_dy_s = dv_dy.toString();
+        let jac_s = math.simplify(jacNode).toString();
+
+        document.getElementById("step1").innerHTML =
+            "<b>Given:</b><br>u = " + u + "<br>v = " + v;
+
+        document.getElementById("step2").innerHTML =
+            "<b>Variables:</b><br>First variable = " + x + "<br>Second variable = " + y;
+
+        document.getElementById("step3").innerHTML =
+            "<b>Partial derivatives:</b><br>" +
+            "∂u/∂" + x + " = " + du_dx_s + "<br>" +
+            "∂u/∂" + y + " = " + du_dy_s + "<br>" +
+            "∂v/∂" + x + " = " + dv_dx_s + "<br>" +
+            "∂v/∂" + y + " = " + dv_dy_s;
+
+        document.getElementById("step4").innerHTML =
+            "<b>Jacobian matrix:</b><br>" +
+            "[ " + du_dx_s + " &nbsp;&nbsp; " + du_dy_s + " ]<br>" +
+            "[ " + dv_dx_s + " &nbsp;&nbsp; " + dv_dy_s + " ]";
+
+        document.getElementById("step5").innerHTML =
+            "<b>Symbolic Jacobian:</b><br>" +
+            "J = (∂u/∂" + x + ")(∂v/∂" + y + ") - (∂u/∂" + y + ")(∂v/∂" + x + ")<br>" +
+            "<b>J = " + jac_s + "</b>";
+
+        if(val1 !== "" && val2 !== ""){
+            let scope = {};
+            scope[x] = parseFloat(val1);
+            scope[y] = parseFloat(val2);
+
+            let numericAnswer = math.evaluate(jac_s, scope);
+
+            document.getElementById("step6").style.display = "block";
+            document.getElementById("step6").innerHTML =
+                "<b>Numeric value:</b><br>" +
+                "At " + x + " = " + val1 + " and " + y + " = " + val2 + ",<br>" +
+                "<b>J = " + numericAnswer + "</b>";
+        }
+        else{
+            document.getElementById("step6").style.display = "block";
+            document.getElementById("step6").innerHTML =
+                "<b>Numeric value:</b><br>No values entered, so only symbolic answer is shown.";
+        }
+
+        document.getElementById("resultBox").style.display = "block";
+
+    }
+    catch(error){
+        showError(
+            "Something is wrong in the expression.<br><br>" +
+            "<b>Check these points:</b><br>" +
+            "Use x*y instead of xy.<br>" +
+            "Use exp(x*y) instead of e^(xy).<br>" +
+            "Use sin(x), cos(x), tan(x) with brackets.<br><br>" +
+            "<b>Error:</b> " + error.message
+        );
+    }
+}
+
+function clearAll(){
+    document.getElementById("uFunc").value = "";
+    document.getElementById("vFunc").value = "";
+    document.getElementById("var1").value = "";
+    document.getElementById("var2").value = "";
+    document.getElementById("val1").value = "";
+    document.getElementById("val2").value = "";
+    document.getElementById("resultBox").style.display = "none";
+    document.getElementById("errorBox").style.display = "none";
+}
+</script>
+
+</body>
+</html>
